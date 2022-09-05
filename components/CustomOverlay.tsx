@@ -74,7 +74,7 @@ const CustomOverlay: FC<PropsWithChildren> = (props) => {
   const [opened, toggle] = useToggle([false, true]);
   useEffect(() => {
     router.push(`/${activeTab}`);
-  }, [activeTab]);
+  }, [activeTab, router]);
 
   return (
     <motion.div
