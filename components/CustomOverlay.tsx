@@ -102,14 +102,20 @@ const CustomOverlay: FC<PropsWithChildren> = (props) => {
                     title={opened ? "Open Menu" : "Close Menu"}
                   />
                 </MediaQuery>
+
                 <StyledGroup onClick={homePageRouteHandler}>
                   <TbBrandPython
                     color={theme.colors.yellow[9]}
                     size={"2.5rem"}
                   />
-                  <Text color="white" weight={"bold"}>
-                    CMSC 201 Lab Section __
-                  </Text>
+                  <MediaQuery
+                    query="(max-width: 570px)"
+                    styles={{ display: "none" }}
+                  >
+                    <Text color="white" weight={"bold"}>
+                      CMSC 201 Lab Section __
+                    </Text>
+                  </MediaQuery>
                 </StyledGroup>
                 <MediaQuery
                   query="(max-width: 1300px)"
@@ -195,84 +201,88 @@ const CustomOverlay: FC<PropsWithChildren> = (props) => {
           },
         })}
       >
-        <Drawer
-          opened={opened}
-          onClose={() => toggle()}
-          title="Pages"
-          padding="xl"
-          size="xl"
-          transition={"pop-top-left"}
-          transitionDuration={250}
-          transitionTimingFunction="ease"
-          classNames={{
-            root: classes.overlay,
-            closeButton: classes.closeButton,
-          }}
-        >
-          <Stack justify={"space-between"}>
-            <Tabs
-              variant="pills"
-              color="gray"
-              value={activeTab}
-              onTabChange={async (tab) => {
-                setActiveTab(tab);
-                toggle();
-              }}
-              className={classes.pagesGroup}
-            >
-              <Tabs.List>
-                <Group>
-                  <Tabs.Tab
-                    value="gl"
-                    style={{ fontSize: ".55em" }}
-                    icon={<RiTerminalBoxLine />}
-                  >
-                    Connect to GL
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    value="labs"
-                    style={{ fontSize: ".55em" }}
-                    icon={<RiFileTextLine />}
-                  >
-                    Lab Documents
-                  </Tabs.Tab>
-                </Group>
-              </Tabs.List>
-            </Tabs>
-            <Group spacing={10}>
-              <motion.div
-                whileHover={{
-                  scale: 1.07,
-                  transition: { duration: 0.5 },
+        <MediaQuery query="(max-height:414px)" styles={{ fontSize: "2.5rem" }}>
+          <Drawer
+            opened={opened}
+            onClose={() => toggle()}
+            title="Pages"
+            padding="xl"
+            size="xl"
+            transition={"pop-top-left"}
+            transitionDuration={250}
+            transitionTimingFunction="ease"
+            classNames={{
+              root: classes.overlay,
+              closeButton: classes.closeButton,
+            }}
+          >
+            <Stack justify={"space-between"}>
+              <Tabs
+                variant="pills"
+                color="gray"
+                value={activeTab}
+                onTabChange={async (tab) => {
+                  setActiveTab(tab);
+                  toggle();
                 }}
-                whileTap={{ scale: 1 }}
+                className={classes.pagesGroup}
               >
-                <Button variant="white" style={{ height: 50 }}>
-                  <Group spacing="xs">
-                    <SiGmail color="red" size={"1.6rem"} />
-                    <Text color={"red"} style={{ fontSize: "1.6em" }}>
-                      Email Me!
-                    </Text>
+                <Tabs.List>
+                  <Group>
+                    <Tabs.Tab
+                      value="gl"
+                      style={{ fontSize: ".55em" }}
+                      icon={<RiTerminalBoxLine />}
+                    >
+                      Connect to GL
+                    </Tabs.Tab>
+                    <Tabs.Tab
+                      value="labs"
+                      style={{ fontSize: ".55em" }}
+                      icon={<RiFileTextLine />}
+                    >
+                      Lab Documents
+                    </Tabs.Tab>
                   </Group>
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{
-                  scale: 1.07,
-                  transition: { duration: 0.5 },
-                }}
-                whileTap={{ scale: 1 }}
-              >
-                <Button style={{ backgroundColor: "#5864f6", height: 50 }}>
-                  <SiDiscord size={"1.6rem"} />
-                  <Text style={{ fontSize: "1.6em", marginLeft: ".8em" }}>
-                    Join The Discord!
-                  </Text>
-                </Button>
-              </motion.div>
-            </Group>
-          </Stack>
-        </Drawer>
+                </Tabs.List>
+              </Tabs>
+              <Group>
+                <motion.div
+                  whileHover={{
+                    scale: 1.07,
+                    transition: { duration: 0.5 },
+                  }}
+                  whileTap={{ scale: 1 }}
+                >
+                  <Button variant="white" style={{ height: 50 }}>
+                    <Group spacing="xs">
+                      <SiGmail color="red" size={"1.6em"} />
+
+                      <Text color={"red"} style={{ fontSize: "1.6em" }}>
+                        Email Me!
+                      </Text>
+                    </Group>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{
+                    scale: 1.07,
+                    transition: { duration: 0.5 },
+                  }}
+                  whileTap={{ scale: 1 }}
+                >
+                  <Button style={{ backgroundColor: "#5864f6", height: 50 }}>
+                    <SiDiscord size={"1.6em"} />
+
+                    <Text style={{ fontSize: "1.6em", marginLeft: ".8em" }}>
+                      Join The Discord!
+                    </Text>
+                  </Button>
+                </motion.div>
+              </Group>
+            </Stack>
+          </Drawer>
+        </MediaQuery>
         {props.children}
       </AppShell>
     </motion.div>
