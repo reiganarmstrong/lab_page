@@ -39,8 +39,8 @@ const GlHelpPage = () => {
           </Text>
         </Group>
         <Text>
-          Without getting too technical, it's the place where you will turn in
-          all your code.
+          Without getting too technical, it&apos;s the place where you will turn
+          in all your code.
           <br /> Dr Lupoli explains the general workflow of how this all works
           in the video below.
         </Text>

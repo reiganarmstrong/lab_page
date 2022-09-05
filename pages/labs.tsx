@@ -45,16 +45,17 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-let i = 4;
-const openLabs: string[] = [];
-const closedLabs: string[] = [];
-for (let j = 1; j < i; j++) {
-  openLabs.push(`Lab ${j}`);
-}
-for (let j = i; j < 20; j++) {
-  closedLabs.push(`Lab ${j}`);
-}
+
 const Labs: NextPage = () => {
+  let i = 4;
+  const openLabs: { name: string; key: string }[] = [];
+  const closedLabs: { name: string; key: string }[] = [];
+  for (let j = 1; j < i; j++) {
+    openLabs.push({ name: `Lab ${j}`, key: `Lab ${j}` });
+  }
+  for (let j = i; j < 20; j++) {
+    closedLabs.push({ name: `Lab ${j}`, key: `Lab ${j}` });
+  }
   const theme = useMantineTheme();
   const { classes } = useStyles();
   return (
@@ -67,7 +68,7 @@ const Labs: NextPage = () => {
       <Grid justify="center" gutter={"xl"} columns={12} style={{ padding: 15 }}>
         {openLabs.map((lab) => {
           return (
-            <Grid.Col key={useId(`${lab}`)} md={3} lg={2}>
+            <Grid.Col key={lab.key} md={3} lg={2}>
               <motion.div
                 whileHover={{
                   scale: 1.07,
@@ -94,7 +95,7 @@ const Labs: NextPage = () => {
                     <Badge color="green" variant="light">
                       open
                     </Badge>
-                    <Text align="center">{lab}</Text>
+                    <Text align="center">{lab.name}</Text>
                   </Stack>
                 </Card>
               </motion.div>
@@ -103,7 +104,7 @@ const Labs: NextPage = () => {
         })}
         {closedLabs.map((lab) => {
           return (
-            <Grid.Col key={useId(`${lab}`)} md={3} lg={2}>
+            <Grid.Col key={lab.key} md={3} lg={2}>
               <Card className={classes.closedCard}>
                 <Card.Section inheritPadding style={{ paddingBottom: 5 }}>
                   <Center>
@@ -114,7 +115,7 @@ const Labs: NextPage = () => {
                   <Badge color="red" variant="light">
                     Closed
                   </Badge>
-                  <Text align="center">{lab}</Text>
+                  <Text align="center">{lab.name}</Text>
                 </Stack>
               </Card>
             </Grid.Col>
