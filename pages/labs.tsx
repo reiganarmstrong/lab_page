@@ -10,6 +10,7 @@ import {
   createStyles,
   CSSObject,
 } from "@mantine/core";
+import { useId } from "@mantine/hooks";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
 import { HiDocumentText } from "react-icons/hi";
@@ -66,7 +67,7 @@ const Labs: NextPage = () => {
       <Grid justify="center" gutter={"xl"} columns={12} style={{ padding: 15 }}>
         {openLabs.map((lab) => {
           return (
-            <Grid.Col md={3} lg={2}>
+            <Grid.Col key={useId(`${lab}`)} md={3} lg={2}>
               <motion.div
                 whileHover={{
                   scale: 1.07,
@@ -102,7 +103,7 @@ const Labs: NextPage = () => {
         })}
         {closedLabs.map((lab) => {
           return (
-            <Grid.Col md={3} lg={2}>
+            <Grid.Col key={useId(`${lab}`)} md={3} lg={2}>
               <Card className={classes.closedCard}>
                 <Card.Section inheritPadding style={{ paddingBottom: 5 }}>
                   <Center>
